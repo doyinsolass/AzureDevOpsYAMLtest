@@ -1,28 +1,18 @@
-name: Simple CI Pipeline
+trigger:
+  branches:
+    include:
+      - main  # Change this if needed
 
-on:
-  push:
-    branches:
-      - main
-  pull_request:
-    branches:
-      - main
+pool:
+  vmImage: 'ubuntu-latest'
 
-jobs:
-  build:
-    runs-on: ubuntu-latest
+steps:
+  - task: UseNode@1
+    inputs:
+      version: '18.x'
 
-    steps:
-      - name: Checkout Repository
-        uses: actions/checkout@v4
+  - script: npm install
+    displayName: 'Install Dependencies'
 
-      - name: Set up Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: 18
-
-      - name: Install Dependencies
-        run: npm install
-
-      - name: Run Tests
-        run: npm test
+  - script: npm test
+    displayName: 'Run Tests'
