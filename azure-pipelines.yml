@@ -1,9 +1,9 @@
 trigger:
-- main
+- main  # Trigger on push to the 'main' branch
 
 pool:
-  vmImage: 'ubuntu-latest'
+  vmImage: 'ubuntu-latest'  # Use the Ubuntu image for the pipeline
 
 steps:
-- script: echo Hello, world!
-  displayName: 'Run a one-line script'
+- script: npm install
+  displayName: 'Install Dependencies'
